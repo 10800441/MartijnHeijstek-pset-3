@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Watch List</string>
+    <string name="searchHint">Search Movie Title</string>
+    <string name="Search">SEARCH</string>
+</resources>
