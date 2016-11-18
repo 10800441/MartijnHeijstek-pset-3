@@ -1,5 +1,10 @@
 package com.example.marty_000.watchlist;
-
+/* Watch List Mprog week 3
+ * Martijn Heijstek, 10800441
+ * 18-11-2016
+ *
+ * Class that retrieves strings from a website
+ */
 import android.os.AsyncTask;
 import java.io.BufferedReader;
 import java.io.IOException;

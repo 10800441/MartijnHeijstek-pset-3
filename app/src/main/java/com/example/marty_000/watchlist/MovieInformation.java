@@ -1,6 +1,9 @@
 package com.example.marty_000.watchlist;
-/*
+/* Watch List Mprog week 3
+ * Martijn Heijstek, 10800441
+ * 18-11-2016
  *
+ * Class that stores useful information from a movie
  */
 import java.io.Serializable;
 

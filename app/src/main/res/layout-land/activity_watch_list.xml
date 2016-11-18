@@ -34,13 +34,26 @@
         android:layout_width="wrap_content"
         android:layout_below="@+id/WatchListTitle"
         android:layout_height="140dp"/>
+
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@+id/WatchListView">
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/WatchListView"
-        android:layout_centerHorizontal="true"
         android:id="@+id/BackButton"
         android:onClick="BackToSearchList"
         android:text="@string/Back"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ClearAll"
+        android:layout_toRightOf="@+id/BackButton"
+        android:layout_toEndOf="@+id/BackButton"
+        android:onClick="ClearPreferences"
+        android:text="@string/clearAll"/>
+</RelativeLayout>
 </RelativeLayout>

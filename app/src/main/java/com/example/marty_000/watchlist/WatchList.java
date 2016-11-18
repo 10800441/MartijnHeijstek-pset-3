@@ -1,5 +1,10 @@
 package com.example.marty_000.watchlist;
-
+/* Watch List Mprog week 3
+ * Martijn Heijstek, 10800441
+ * 18-11-2016
+ *
+ * Activity where the WatchList is displayed to the user
+ */
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -75,11 +80,11 @@ public class WatchList extends AppCompatActivity {
         finish();
     }
 
-    // Empty the Watchlist totally
+    // Empty the WatchList totally
     public void ClearPreferences(View view) {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("WatchListPref", new JSONArray().toString());
-        editor.commit();
+        editor.apply();
         startActivity(new Intent (this, WatchList.class));
         finish();
     }

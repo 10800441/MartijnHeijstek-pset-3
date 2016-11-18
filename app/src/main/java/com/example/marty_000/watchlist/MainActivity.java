@@ -1,17 +1,20 @@
 package com.example.marty_000.watchlist;
-
+/* Watch List Mprog week 3
+ * Martijn Heijstek, 10800441
+ * 18-11-2016
+ *
+ * Activity where the user can search for a movie title in the Omdb webdatabase.
+ * Matching titles are displayed to the user.
+ */
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
