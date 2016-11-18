@@ -6,9 +6,12 @@ package com.example.marty_000.watchlist;
  * Activity where the user can search for a movie title in the Omdb webdatabase.
  * Matching titles are displayed to the user.
  */
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.PersistableBundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -51,8 +54,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Welcome message, only shown on first welcome
-        //Source: http://stackoverflow.com/questions/6264694/how-to-add-message-box-with-ok-button
         if (!prefs.contains("firstWelcome")){
+
+            // Message with ok button
+            //Source: http://stackoverflow.com/questions/6264694/how-to-add-message-box-with-ok-button
             AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
             dlgAlert.setMessage("Welcome to the Omdb WatchList!\n" +
                 "You can search for a movie title or see your personal watchList");
@@ -75,15 +80,55 @@ public class MainActivity extends AppCompatActivity {
 
     //    Searches the database upon query and updates the recycler view with the output.
     public void searchQuery(View view) throws IOException {
+
         final ListView listView = (ListView) findViewById(R.id.listView);
         EditText editText = (EditText) findViewById(R.id.editText);
 
         //Get the tags the user provided
         String query = URLEncoder.encode(editText.getText().toString().trim(), "UTF-8");
-        URL url = new URL(String.format("http://www.omdbapi.com/?s=%s", query));
+        URL completeUrl = new URL(String.format("http://www.omdbapi.com/?s=%s", query));
         editText.getText().clear();
 
-        // Retrieve the information from the API
+        // Check for internet connection
+        // Source: http://stackoverflow.com/questions/5474089/
+        //          how-to-check-currently-internet-connection-is-available-or-not-in-android
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if((connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() ==
+                NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() ==
+                        NetworkInfo.State.CONNECTED)) {
+
+            // Retrieve the information from the API
+            getMovieArray(completeUrl);
+
+        } else {
+            // Not connected to a network
+            Toast.makeText(this, "No internet connection detected", Toast.LENGTH_LONG).show();
+        }
+
+    // Standard adapter
+    ArrayAdapter<MovieInformation> moviesAdapter = new ArrayAdapter<>(this,
+            android.R.layout.simple_list_item_1, moviesList);
+    listView.setAdapter(moviesAdapter);
+
+        // Actoin listener for the items in the listView
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                MovieInformation movie = (MovieInformation) listView.getItemAtPosition(i);
+                Intent ShowInfo = new Intent(MainActivity.this, ShowInfoActivity.class);
+                ShowInfo.putExtra("movieID", movie.getImdb());
+                ShowInfo.putExtra("poster", movie.getPoster());
+                ShowInfo.putExtra("", movie.getPoster());
+                startActivity(ShowInfo);
+            }
+
+
+        });
+
+    }
+    private void getMovieArray(URL url){
         try {
             // Get dict from the AsyncTask
             JSONObject jsonDict = new JSONObject(new OmdbAsyncTask().execute(url).get());
@@ -102,34 +147,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (InterruptedException | ExecutionException | JSONException e) {
             e.printStackTrace();
         }
-
-    // Standard adapter
-    ArrayAdapter<MovieInformation> moviesAdapter = new ArrayAdapter<>(this,
-            android.R.layout.simple_list_item_1, moviesList);
-    listView.setAdapter(moviesAdapter);
-
-        // Actoinlistener for the items in the listView
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                MovieInformation movie = (MovieInformation) listView.getItemAtPosition(i);
-                Intent ShowInfo = new Intent(MainActivity.this, ShowInfoActivity.class);
-                ShowInfo.putExtra("movieID", movie.getImdb());
-                ShowInfo.putExtra("poster", movie.getPoster());
-                ShowInfo.putExtra("", movie.getPoster());
-                startActivity(ShowInfo);
-            }
-
-
-        });
-
-    }
-
-    // Save the editText state
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-        outState.putSerializable("movies", moviesList);
     }
 
     // Open the watchList
