@@ -23,12 +23,12 @@
             android:id="@+id/PosterImage"/>
     </RelativeLayout>
     <RelativeLayout
-       android:id="@+id/Description"
-       android:layout_toEndOf="@+id/Poster"
-       android:layout_toRightOf="@+id/Poster"
-       android:layout_width="200dp"
-       android:layout_alignTop="@+id/Poster"
-       android:layout_height="wrap_content" >
+        android:id="@+id/Description"
+        android:layout_toEndOf="@+id/Poster"
+        android:layout_toRightOf="@+id/Poster"
+        android:layout_width="200dp"
+        android:layout_alignTop="@+id/Poster"
+        android:layout_height="wrap_content" >
 
         <TextView
             android:textStyle="bold"
@@ -84,50 +84,66 @@
             android:layout_below="@+id/moviePersons"
             android:layout_marginTop="10dp"
             android:id="@+id/movieDescription"/>
-</RelativeLayout>
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="40dp"
-    android:layout_below="@+id/Poster"
-    android:layout_alignLeft="@+id/Poster"
-    android:layout_alignStart="@+id/Poster"
-    android:id="@+id/Plot">
-    <TextView
+    </RelativeLayout>
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/moviePlot"/>
+        android:layout_alignTop="@+id/Description"
+        android:layout_toRightOf="@+id/Description"
+        android:layout_toEndOf="@+id/Description"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:text="@string/AddWatchList"
+            android:layout_height="wrap_content"
+            android:onClick="UpdateWatchList"
+            android:id="@+id/AddButton"/>
+        <Button
+            android:layout_below="@+id/AddButton"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:text="@string/ViewWatchList"
+            android:onClick="ToWatchList"
+            android:layout_height="wrap_content"
+            android:id="@+id/WachListButton"/>
+        </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_below="@+id/Poster"
+        android:layout_alignLeft="@+id/Description"
+        android:layout_alignStart="@+id/Description"
+        android:id="@+id/Plot">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/moviePlot"/>
     </RelativeLayout>
     <RelativeLayout
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/Plot"
-        android:layout_centerHorizontal="true">
-
-    <Button
         android:layout_width="wrap_content"
-        android:text="@string/Back"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/AddButton"
-        android:layout_toStartOf="@+id/AddButton"
-        android:onClick="BackToSearchList"
-        android:id="@+id/BackButton"/>
+        android:layout_below="@+id/Poster"
+        android:layout_margin="5dp"
+        android:layout_alignLeft="@+id/Poster"
+        android:layout_alignStart="@+id/Poster">
 
-    <ToggleButton
-        android:layout_width="140dp"
-        android:text="@string/AddWatchList"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/AddButton"/>
         <Button
-            android:layout_toRightOf="@+id/AddButton"
-            android:layout_toEndOf="@+id/AddButton"
-            android:layout_width="wrap_content"
-            android:text="@string/ViewWatchList"
-            android:layout_height="wrap_content"
-            android:id="@+id/WachListButton"/>
 
-</RelativeLayout></RelativeLayout>
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:text="@string/Back"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_height="wrap_content"
+            android:onClick="BackToSearchList"
+            android:id="@+id/BackButton"/>
+    </RelativeLayout></RelativeLayout>

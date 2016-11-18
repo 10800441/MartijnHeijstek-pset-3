@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Make a new watch list
+        // Make a new empty watch list
         prefs = getApplicationContext().getSharedPreferences("MyPref", 0);
         if (!prefs.contains("WatchListPref")){
             SharedPreferences.Editor editor = prefs.edit();
@@ -47,10 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
     //    Searches the database upon query and updates the recycler view with the output.
     public void searchQuery(View view) throws IOException {
-
+        TextView initText = (TextView) findViewById(R.id.initText);
+        initText.setVisibility(View.INVISIBLE);
         final ListView listView = (ListView) findViewById(R.id.listView);
         EditText editText = (EditText) findViewById(R.id.editText);
 
+        //Get the tags the user provided
         String query = URLEncoder.encode(editText.getText().toString().trim(), "UTF-8");
         URL url = new URL(String.format("http://www.omdbapi.com/?s=%s", query));
         editText.getText().clear();
@@ -74,12 +77,13 @@ public class MainActivity extends AppCompatActivity {
         } catch (InterruptedException | ExecutionException | JSONException e) {
             e.printStackTrace();
         }
-    // standard adapter
+
+    // Standard adapter
     ArrayAdapter<MovieInformation> moviesAdapter = new ArrayAdapter<>(this,
             android.R.layout.simple_list_item_1, moviesList);
     listView.setAdapter(moviesAdapter);
 
-        // on click
+        // Actoinlistener for the items in the listView
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -95,9 +99,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    // Save the editText state
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
         outState.putSerializable("movies", moviesList);
+    }
+
+    // Open the watchList
+    public void ToWatchList(View view){
+        Intent toWatchList = new Intent(MainActivity.this, WatchList.class);
+        startActivity(toWatchList);
     }
 }

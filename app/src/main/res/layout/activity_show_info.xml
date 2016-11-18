@@ -110,16 +110,18 @@
     <Button
         android:layout_width="wrap_content"
         android:text="@string/Back"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_toLeftOf="@+id/AddButton"
         android:layout_toStartOf="@+id/AddButton"
         android:onClick="BackToSearchList"
         android:id="@+id/BackButton"/>
 
     <Button
-        android:layout_width="140dp"
+        android:layout_width="100dp"
+        android:textStyle="bold"
+        android:textSize="15sp"
         android:text="@string/AddWatchList"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         android:onClick="UpdateWatchList"
         android:id="@+id/AddButton"/>
@@ -129,7 +131,7 @@
             android:layout_width="wrap_content"
             android:text="@string/ViewWatchList"
             android:onClick="ToWatchList"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:id="@+id/WachListButton"/>
 
 </RelativeLayout></RelativeLayout>

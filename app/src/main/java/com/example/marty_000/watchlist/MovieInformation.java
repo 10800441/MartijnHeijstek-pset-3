@@ -1,5 +1,7 @@
 package com.example.marty_000.watchlist;
-
+/*
+ *
+ */
 import java.io.Serializable;
 
 class MovieInformation implements Serializable{

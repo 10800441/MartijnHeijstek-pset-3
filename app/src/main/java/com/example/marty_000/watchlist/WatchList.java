@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,26 +18,32 @@ import java.util.ArrayList;
 
 public class WatchList extends AppCompatActivity {
     ArrayList<MovieInformation> moviesList = new ArrayList<>();
+    SharedPreferences prefs;
+    TextView initWatchList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_watch_list);
 
-        SharedPreferences prefs = getApplicationContext().getSharedPreferences("MyPref", 0);
+        // Retrieve the watchlist
+        prefs = getApplicationContext().getSharedPreferences("MyPref", 0);
         String WatchListString = prefs.getString("WatchListPref", null);
         JSONArray watchList = new JSONArray();
-        try {
 
+        initWatchList = (TextView) findViewById(R.id.initWatchList);
+        initWatchList.setVisibility(View.VISIBLE);
+
+        try {
             if (WatchListString != null) {
                 watchList = new JSONArray(WatchListString);
+                initWatchList.setVisibility(View.INVISIBLE);
             }
             for (int i = 0; i < watchList.length(); i++) {
                 JSONObject movie = watchList.getJSONObject(i);
                 moviesList.add(new MovieInformation(movie.getString("Title"), movie.getString("Year")
                         , movie.getString("imdbID"), movie.getString("Poster")));
             }
-
         } catch ( JSONException ex) {
             ex.printStackTrace();
         }
@@ -59,15 +66,23 @@ public class WatchList extends AppCompatActivity {
                 ShowInfo.putExtra("", movie.getPoster());
                 startActivity(ShowInfo);
             }
-
-
         });
     }
+
     // Go back to searchPage
     public void BackToSearchList(View view) {
         startActivity(new Intent (this, MainActivity.class));
         finish();
+    }
 
+    // Empty the Watchlist totally
+    public void ClearPreferences(View view) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("WatchListPref", new JSONArray().toString());
+        editor.commit();
+        startActivity(new Intent (this, WatchList.class));
+        finish();
     }
 }
+
 
