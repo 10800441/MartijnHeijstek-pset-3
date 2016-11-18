@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_show_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.marty_000.watchlist.ShowInfoActivity">
+    <RelativeLayout
+        android:id="@+id/Poster"
+        android:layout_margin="5dp"
+        android:layout_width="120dp"
+        android:layout_height="150dp" >
+
+        <ImageView
+            android:src="@drawable/noposter"
+            android:contentDescription="@string/NaN"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:id="@+id/PosterImage"/>
+    </RelativeLayout>
+    <RelativeLayout
+       android:id="@+id/Description"
+       android:layout_toEndOf="@+id/Poster"
+       android:layout_toRightOf="@+id/Poster"
+       android:layout_width="200dp"
+       android:layout_alignTop="@+id/Poster"
+       android:layout_height="wrap_content" >
+
+        <TextView
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:text="@string/NoContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/movieTitle"/>
+        <TextView
+            android:text="@string/NaN"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/movieTitle"
+            android:layout_alignLeft="@+id/movieTitle"
+            android:layout_alignStart="@+id/movieTitle"
+            android:id="@+id/movieRuntime"/>
+        <TextView
+            android:text="@string/NaN"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/movieTitle"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_toRightOf="@+id/movieRuntime"
+            android:layout_toEndOf="@+id/movieRuntime"
+            android:id="@+id/movieGenre"/>
+        <TextView
+            android:textStyle="bold"
+            android:text="@string/CastCrew"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/movieGenre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/movieTitle"
+            android:layout_alignStart="@+id/movieTitle"
+            android:id="@+id/movieCastCrew"/>
+        <TextView
+            android:text="@string/NaN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/movieGenre"
+            android:layout_alignTop="@+id/movieCastCrew"
+            android:layout_toRightOf="@+id/movieCastCrew"
+            android:layout_toEndOf="@+id/movieCastCrew"
+            android:id="@+id/moviePersons"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/moviePersons"
+            android:layout_marginTop="10dp"
+            android:id="@+id/movieDescription"/>
+</RelativeLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="40dp"
+    android:layout_below="@+id/Poster"
+    android:layout_alignLeft="@+id/Poster"
+    android:layout_alignStart="@+id/Poster"
+    android:id="@+id/Plot">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/moviePlot"/>
+    </RelativeLayout>
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/Plot"
+        android:layout_centerHorizontal="true">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:text="@string/Back"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/AddButton"
+        android:layout_toStartOf="@+id/AddButton"
+        android:onClick="BackToSearchList"
+        android:id="@+id/BackButton"/>
+
+    <ToggleButton
+        android:layout_width="140dp"
+        android:text="@string/AddWatchList"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/AddButton"/>
+        <Button
+            android:layout_toRightOf="@+id/AddButton"
+            android:layout_toEndOf="@+id/AddButton"
+            android:layout_width="wrap_content"
+            android:text="@string/ViewWatchList"
+            android:layout_height="wrap_content"
+            android:id="@+id/WachListButton"/>
+
+</RelativeLayout></RelativeLayout>

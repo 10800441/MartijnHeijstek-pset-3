@@ -2,4 +2,10 @@
     <string name="app_name">Watch List</string>
     <string name="searchHint">Search Movie Title</string>
     <string name="Search">SEARCH</string>
+    <string name="NoContent">No content was retieved!</string>
+    <string name="NaN">NaN</string>
+    <string name="CastCrew">Director: \nRating:</string>
+    <string name="Back">Back</string>
+    <string name="AddWatchList">Add</string>
+    <string name="ViewWatchList">View WatchList</string>
 </resources>
