@@ -39,7 +39,10 @@ public class WatchList extends AppCompatActivity {
         JSONArray watchList = new JSONArray();
 
         // Display a message if the user has no movies added to the WatchList
-        if(moviesList.isEmpty() && !prefs.contains("emptyWatchList")){
+        if(moviesList.isEmpty() && !(prefs.contains("emptyWatchList"))){
+
+            // Message with ok button
+            //Source: http://stackoverflow.com/questions/6264694/how-to-add-message-box-with-ok-button
 
             AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
             dlgAlert.setMessage("You have no saved movies yet!\n" +
@@ -101,7 +104,6 @@ public class WatchList extends AppCompatActivity {
     public void ClearPreferences(View view) {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("WatchListPref", new JSONArray().toString());
-        editor.remove("emptyWatchList");
         editor.apply();
         startActivity(new Intent (this, WatchList.class));
         finish();
