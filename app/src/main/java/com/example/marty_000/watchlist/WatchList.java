@@ -34,12 +34,13 @@ public class WatchList extends AppCompatActivity {
         setContentView(R.layout.activity_watch_list);
 
         // Retrieve the watchlist
-        prefs = getApplicationContext().getSharedPreferences("MyPref", 0);
+        prefs = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         String WatchListString = prefs.getString("WatchListPref", null);
         JSONArray watchList = new JSONArray();
 
         // Display a message if the user has no movies added to the WatchList
-        if(!prefs.contains("emptyWatchList") && WatchListString == null){
+        if(moviesList.isEmpty() && !prefs.contains("emptyWatchList")){
+
             AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
             dlgAlert.setMessage("You have no saved movies yet!\n" +
                     "Search for movies and add them to your personal watchList");
@@ -54,7 +55,7 @@ public class WatchList extends AppCompatActivity {
             dlgAlert.create().show();
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("emptyWatchList", "emptyWatchList");
-            editor.commit();
+            editor.apply();
         }
         try {
             if (WatchListString != null) {
@@ -100,6 +101,7 @@ public class WatchList extends AppCompatActivity {
     public void ClearPreferences(View view) {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("WatchListPref", new JSONArray().toString());
+        editor.remove("emptyWatchList");
         editor.apply();
         startActivity(new Intent (this, WatchList.class));
         finish();

@@ -44,12 +44,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Make a new empty watch list
-        prefs = getApplicationContext().getSharedPreferences("MyPref", 0);
+        prefs = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
 
         if (!prefs.contains("WatchListPref")){
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("WatchListPref", new JSONArray().toString());
-            editor.commit();
+            editor.apply();
         }
 
 
