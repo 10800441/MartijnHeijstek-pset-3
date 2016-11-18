@@ -6,9 +6,11 @@ package com.example.marty_000.watchlist;
  * Activity where the user can search for a movie title in the Omdb webdatabase.
  * Matching titles are displayed to the user.
  */
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.PersistableBundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -40,9 +42,31 @@ public class MainActivity extends AppCompatActivity {
 
         // Make a new empty watch list
         prefs = getApplicationContext().getSharedPreferences("MyPref", 0);
+
         if (!prefs.contains("WatchListPref")){
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("WatchListPref", new JSONArray().toString());
+            editor.commit();
+        }
+
+
+        //Welcome message, only shown on first welcome
+        //Source: http://stackoverflow.com/questions/6264694/how-to-add-message-box-with-ok-button
+        if (!prefs.contains("firstWelcome")){
+            AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+            dlgAlert.setMessage("Welcome to the Omdb WatchList!\n" +
+                "You can search for a movie title or see your personal watchList");
+            dlgAlert.setTitle("WatchList");
+            dlgAlert.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //dismiss the dialog
+                    }
+                });
+            dlgAlert.setCancelable(true);
+            dlgAlert.create().show();
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("firstWelcome", "firstWelcome");
             editor.commit();
         }
     }
@@ -51,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
 
     //    Searches the database upon query and updates the recycler view with the output.
     public void searchQuery(View view) throws IOException {
-        TextView initText = (TextView) findViewById(R.id.initText);
-        initText.setVisibility(View.INVISIBLE);
         final ListView listView = (ListView) findViewById(R.id.listView);
         EditText editText = (EditText) findViewById(R.id.editText);
 

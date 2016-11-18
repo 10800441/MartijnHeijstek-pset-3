@@ -10,16 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.marty_000.watchlist.WatchList">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="visible"
-        android:layout_margin="15dp"
-        android:id="@+id/initWatchList"
-        android:text="@string/initWatchList"
-        />
     <ListView
         android:layout_margin="10dp"
         android:id="@+id/WatchListView"

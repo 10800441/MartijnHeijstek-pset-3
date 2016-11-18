@@ -5,8 +5,10 @@ package com.example.marty_000.watchlist;
  *
  * Activity where the WatchList is displayed to the user
  */
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -36,13 +38,27 @@ public class WatchList extends AppCompatActivity {
         String WatchListString = prefs.getString("WatchListPref", null);
         JSONArray watchList = new JSONArray();
 
-        initWatchList = (TextView) findViewById(R.id.initWatchList);
-        initWatchList.setVisibility(View.VISIBLE);
-
+        // Display a message if the user has no movies added to the WatchList
+        if(!prefs.contains("emptyWatchList") && WatchListString == null){
+            AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+            dlgAlert.setMessage("You have no saved movies yet!\n" +
+                    "Search for movies and add them to your personal watchList");
+            dlgAlert.setTitle("WatchList");
+            dlgAlert.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //dismiss the dialog
+                        }
+                    });
+            dlgAlert.setCancelable(true);
+            dlgAlert.create().show();
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("emptyWatchList", "emptyWatchList");
+            editor.commit();
+        }
         try {
             if (WatchListString != null) {
                 watchList = new JSONArray(WatchListString);
-                initWatchList.setVisibility(View.INVISIBLE);
             }
             for (int i = 0; i < watchList.length(); i++) {
                 JSONObject movie = watchList.getJSONObject(i);

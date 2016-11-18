@@ -10,6 +10,4 @@
     <string name="AddWatchList">Add</string>
     <string name="ViewWatchList">View\nWatchList</string>
     <string name="clearAll">Clear all</string>
-    <string name="initText">Welcome to the Omdb WatchList!\nYou can search for a movie title or see your personal watchList</string>
-    <string name="initWatchList">You have no saved movies yet!\nSearch for movies and add them to your personal watchList</string>
 </resources>
